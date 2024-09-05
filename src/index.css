@@ -61,9 +61,12 @@
 
 @layer base {
   * {
+    font-family: 'Courier New', Courier, monospace;
+    
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
 }
