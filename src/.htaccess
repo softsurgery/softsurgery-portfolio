@@ -2,7 +2,7 @@
 RewriteEngine Off
 
 # Set the base directory for the rewrite
-RewriteBase /{{BASE_SERVER_URL}}
+RewriteBase /{{HTACCESS_ORIGIN}}
 
 # Allow direct access to files and directories
 RewriteCond %{REQUEST_FILENAME} -f [OR]

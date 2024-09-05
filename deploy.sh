@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export $(grep -v '^#' .env | xargs)
+export $(grep -v '^#' .env.${1} | xargs)
 
 HOST=$FTP_HOST
 PORT=$FTP_PORT

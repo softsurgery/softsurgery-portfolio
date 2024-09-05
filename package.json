@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && ./build.sh",
-    "deploy": "tsc -b && vite build && ./build.sh && ./deploy.sh",
+    "build-locally": "tsc -b && vite build --mode staging && ./build.sh staging",
+    "build-remote": "tsc -b && vite build --mode production && ./build.sh production",
+    "deploy": "tsc -b && vite build --mode production && ./build.sh production && ./deploy.sh production",
     "lint": "eslint .",
     "preview": "vite preview"
   },

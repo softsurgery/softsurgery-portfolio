@@ -43,6 +43,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <div className="flex flex-col min-h-screen justify-center items-center">
           <RouterProvider router={router} />
+          OVHO
         </div>
       </QueryClientProvider>
     </ThemeProvider>
