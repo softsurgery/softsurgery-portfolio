@@ -1,16 +1,12 @@
 import { api } from "@/api";
-import Navbar from "@/components/layout/public/Navbar";
-import { ThemeProvider } from "@/components/theme-provider";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import { useQuery } from "react-query";
 
-interface PublicRouteProps {
+interface HomePageProps {
   className?: string;
 }
 
-export function PublicRoute({ className }: PublicRouteProps) {
-  // Fetch both portfolio_owner and owner_description in one API call
+export function HomePage({ className }: HomePageProps) {
   const {
     data: configData,
     isLoading,
@@ -36,26 +32,44 @@ export function PublicRoute({ className }: PublicRouteProps) {
   );
 
   return (
-    <div
-      className={cn(
-        "min-h-screen max-h-screen bg-background mx-auto py-12 mb-10",
-        "px-10 sm:px-72 md:px-64 lg:px-52 xl:px-40 2xl:px-8",
-        className
-      )}
-    >
-      <ThemeProvider defaultTheme="dark">
-        <TooltipProvider delayDuration={0}>
-          <h1 className="text-[3rem] font-black">
-            Hi, I'm {portfolio_owner?.value} 👋
-          </h1>
+    <div className={cn(className)}>
+      <div>
+        <h1 className="text-[3rem] font-black">
+          Hi, I'm {portfolio_owner?.value} 👋
+        </h1>
 
-          {owner_description?.value.split(".").map((phrase) => {
-           return  phrase && <h1 className="text-[1.2rem] font-bold text-justify py-2">{phrase}.</h1>;
+        {owner_description?.value.split(".").map((phrase) => {
+          return (
+            phrase && (
+              <h1 className="text-[1.2rem] font-bold py-2">{phrase}.</h1>
+            )
+          );
+        })}
+      </div>
+      <div className="mt-10">
+        <h1 className="text-[2rem] font-black">About :</h1>
+        {`My fascination with computers began early, drawn to both the hardware
+        and software that power our world. That connection between systems has
+        always inspired me, and building web applications and software now
+        brings me an enduring sense of fulfillment. In 2020, I proudly earned my
+        baccalaureate in math, a subject that continues to captivate me, and
+        soon after, I began my journey in software engineering. In college, my
+        focus shifted toward crafting efficient, reusable code, ensuring the
+        systems I build can scale seamlessly. My love for math remains a
+        constant, fueling my approach to problem-solving and innovation.
+        Alongside my studies, I began tutoring students in IT and math, sharing
+        my knowledge and helping others conquer the same challenges. Now, as an
+        active developer, I’m driven to push boundaries, create impactful
+        solutions, and leave my mark on the digital world`
+          .split(".")
+          .map((phrase) => {
+            return (
+              phrase && (
+                <h1 className="text-[1.2rem] font-bold py-2">{phrase}.</h1>
+              )
+            );
           })}
-
-          <Navbar />
-        </TooltipProvider>
-      </ThemeProvider>
+      </div>
     </div>
   );
 }
