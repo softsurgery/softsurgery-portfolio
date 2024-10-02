@@ -5,6 +5,7 @@ import { HomePage } from "./pages/public/page";
 import { cn } from "./lib/utils";
 import { TooltipProvider } from "./components/ui/tooltip";
 import Navbar from "./components/layout/public/Navbar";
+import { ThreeDSphere } from "./components/other/3d-sphere/3d-sphere";
 
 const queryClient = new QueryClient();
 
@@ -14,6 +15,7 @@ function App() {
       path: "/",
       element: <HomePage />,
     },
+    { path: "sphere", element: <ThreeDSphere /> },
     {
       path: "*",
       element: <div>{window.location.href}</div>,
@@ -29,7 +31,7 @@ function App() {
           )}
         >
           <TooltipProvider delayDuration={0}>
-            <RouterProvider router={router} /> 
+            <RouterProvider router={router} />
             <Navbar />
           </TooltipProvider>
         </div>

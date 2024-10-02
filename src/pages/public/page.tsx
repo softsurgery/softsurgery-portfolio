@@ -1,4 +1,5 @@
 import { api } from "@/api";
+import { ThreeDSphere } from "@/components/other/3d-sphere/3d-sphere";
 import { cn } from "@/lib/utils";
 import { useQuery } from "react-query";
 
@@ -34,42 +35,14 @@ export function HomePage({ className }: HomePageProps) {
   return (
     <div className={cn(className)}>
       <div>
-        <h1 className="text-[3rem] font-black">
+        <ThreeDSphere className="my-10"/>
+        <h1 className="text-[0.8rem] sm:text-[1rem] md:text-[1.7rem] lg:text-[2.5em] font-black text-center">
           Hi, I'm {portfolio_owner?.value} 👋
         </h1>
 
-        {owner_description?.value.split(".").map((phrase) => {
-          return (
-            phrase && (
-              <h1 className="text-[1.2rem] font-bold py-2">{phrase}.</h1>
-            )
-          );
-        })}
+        <h1 className="text-[0.4rem] sm:text-[0.5rem] md:text-[0.8rem] lg:text-[1em] font-bold py-2 text-center">{owner_description?.value}.</h1>
       </div>
-      <div className="mt-10">
-        <h1 className="text-[2rem] font-black">About :</h1>
-        {`My fascination with computers began early, drawn to both the hardware
-        and software that power our world. That connection between systems has
-        always inspired me, and building web applications and software now
-        brings me an enduring sense of fulfillment. In 2020, I proudly earned my
-        baccalaureate in math, a subject that continues to captivate me, and
-        soon after, I began my journey in software engineering. In college, my
-        focus shifted toward crafting efficient, reusable code, ensuring the
-        systems I build can scale seamlessly. My love for math remains a
-        constant, fueling my approach to problem-solving and innovation.
-        Alongside my studies, I began tutoring students in IT and math, sharing
-        my knowledge and helping others conquer the same challenges. Now, as an
-        active developer, I’m driven to push boundaries, create impactful
-        solutions, and leave my mark on the digital world`
-          .split(".")
-          .map((phrase) => {
-            return (
-              phrase && (
-                <h1 className="text-[1.2rem] font-bold py-2">{phrase}.</h1>
-              )
-            );
-          })}
-      </div>
+      Houssem
     </div>
   );
 }
