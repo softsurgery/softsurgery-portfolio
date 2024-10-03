@@ -18,11 +18,11 @@ export const ThreeDSphere = ({className}:ThreeDSphereProps) => {
               <div
                 key={spokeIndex}
                 className={cn(
-                  "bg-red-700 dark:bg-white",
+                  "bg-green-700 dark:bg-white",
                   ` spoke spoke-${spokeIndex}`
                 )}
               >
-                <div className="dot bg-purple-700 dark:bg-white"></div>
+                <div className="dot bg-green-700 dark:bg-white"></div>
               </div>
             ))}
           </div>

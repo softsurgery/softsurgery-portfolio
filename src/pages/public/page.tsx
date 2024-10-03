@@ -1,5 +1,6 @@
 import { api } from "@/api";
 import { ThreeDSphere } from "@/components/other/3d-sphere/3d-sphere";
+import { TypingAnimation } from "@/components/ui/typing-animation";
 import { cn } from "@/lib/utils";
 import { useQuery } from "react-query";
 
@@ -34,15 +35,15 @@ export function HomePage({ className }: HomePageProps) {
 
   return (
     <div className={cn(className)}>
-      <div>
-        <ThreeDSphere className="my-10"/>
-        <h1 className="text-[0.8rem] sm:text-[1rem] md:text-[1.7rem] lg:text-[2.5em] font-black text-center">
-          Hi, I'm {portfolio_owner?.value} 👋
-        </h1>
-
-        <h1 className="text-[0.4rem] sm:text-[0.5rem] md:text-[0.8rem] lg:text-[1em] font-bold py-2 text-center">{owner_description?.value}.</h1>
-      </div>
-      Houssem
+      <ThreeDSphere className="my-10" />
+      <h1 className="text-[1.4rem] sm:text-[1.7rem] md:text-[1.9rem] lg:text-[2em] font-extrabold text-center">
+      Hi, I'm {portfolio_owner?.value} 👋
+      </h1>
+        <TypingAnimation
+          className="text-[0.9rem] sm:text-[1rem] md:text-[1.2rem] lg:text-[1.4em] py-2 font-normal text-black dark:text-white"
+          text={owner_description?.value || ""}
+          duration={40}
+        />
     </div>
   );
 }

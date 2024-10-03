@@ -62,7 +62,6 @@
 @layer base {
   * {
     font-family: 'Courier New', Courier, monospace;
-    
     @apply border-border;
   }
   body {
