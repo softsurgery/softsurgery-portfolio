@@ -1,5 +1,5 @@
 import { axios } from "./axios";
-import { AppConfig } from "./types";
+import { AppConfig } from "../types";
 
 const get = async (keys: string | string[]): Promise<AppConfig[]> => {
   const queryParam = Array.isArray(keys)

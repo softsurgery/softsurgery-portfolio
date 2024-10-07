@@ -20,9 +20,28 @@ switch ($requestMethod) {
             if ($configs) {
                 $response = [];
                 foreach ($configs as $config) {
-                    $response[] = ['key' => $config->getKey(), 'value' => $config->getValue()];
+                    // Ensure proper UTF-8 encoding for both key and value
+                    $response[] = [
+                        'key' => mb_convert_encoding($config->getKey(), 'UTF-8', 'auto'),
+                        'value' => mb_convert_encoding($config->getValue(), 'UTF-8', 'auto')
+                    ];
                 }
-                echo json_encode($response);
+                
+                // Encode the response to JSON
+                $json = json_encode($response);
+
+                // Check if json_encode() failed
+                if ($json === false) {
+                    // Return the JSON encoding error
+                    http_response_code(500);
+                    echo json_encode([
+                        'error' => 'JSON encoding failed',
+                        'message' => json_last_error_msg()
+                    ]);
+                } else {
+                    // Return the JSON response
+                    echo $json;
+                }
             } else {
                 http_response_code(404);
                 echo json_encode(['error' => 'No configs found']);
@@ -32,7 +51,26 @@ switch ($requestMethod) {
             $config = $controller->getConfig($key);
 
             if ($config) {
-                echo json_encode(['key' => $config->getKey(), 'value' => $config->getValue()]);
+                $response = [
+                    'key' => mb_convert_encoding($config->getKey(), 'UTF-8', 'auto'),
+                    'value' => mb_convert_encoding($config->getValue(), 'UTF-8', 'auto')
+                ];
+                
+                // Encode the response to JSON
+                $json = json_encode($response);
+
+                // Check if json_encode() failed
+                if ($json === false) {
+                    // Return the JSON encoding error
+                    http_response_code(500);
+                    echo json_encode([
+                        'error' => 'JSON encoding failed',
+                        'message' => json_last_error_msg()
+                    ]);
+                } else {
+                    // Return the JSON response
+                    echo $json;
+                }
             } else {
                 http_response_code(404);
                 echo json_encode(['error' => 'Config not found']);
@@ -48,10 +86,32 @@ switch ($requestMethod) {
             $data = json_decode(file_get_contents("php://input"), true);
 
             if (isset($data['key']) && isset($data['value'])) {
-                $config = new AppConfigModel($data['key'], $data['value']);
+                $config = new AppConfigModel(
+                    mb_convert_encoding($data['key'], 'UTF-8', 'auto'),
+                    mb_convert_encoding($data['value'], 'UTF-8', 'auto')
+                );
                 $controller->createConfig($config);
 
-                echo json_encode(['key' => $config->getKey(), 'value' => $config->getValue()]);
+                $response = [
+                    'key' => $config->getKey(),
+                    'value' => $config->getValue()
+                ];
+                
+                // Encode the response to JSON
+                $json = json_encode($response);
+
+                // Check if json_encode() failed
+                if ($json === false) {
+                    // Return the JSON encoding error
+                    http_response_code(500);
+                    echo json_encode([
+                        'error' => 'JSON encoding failed',
+                        'message' => json_last_error_msg()
+                    ]);
+                } else {
+                    // Return the JSON response
+                    echo $json;
+                }
             } else {
                 http_response_code(400);
                 echo json_encode(['error' => 'Missing key or value']);
@@ -63,7 +123,7 @@ switch ($requestMethod) {
         break;
 
     default:
-        http_response_code(405); // Method not allowed
+        http_response_code(405);
         echo json_encode(['error' => 'Method not allowed']);
         break;
 }

@@ -5,7 +5,6 @@ import { HomePage } from "./pages/public/page";
 import { cn } from "./lib/utils";
 import { TooltipProvider } from "./components/ui/tooltip";
 import Navbar from "./components/layout/public/Navbar";
-import { ThreeDSphere } from "./components/other/3d-sphere/3d-sphere";
 
 const queryClient = new QueryClient();
 
@@ -15,7 +14,7 @@ function App() {
       path: "/",
       element: <HomePage />,
     },
-    { path: "sphere", element: <ThreeDSphere /> },
+  
     {
       path: "*",
       element: <div>{window.location.href}</div>,
@@ -27,7 +26,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <div
           className={cn(
-            "min-h-screen bg-background font-sans antialiased w-[80vw] mx-auto py-12 sm:py-24 px-6"
+            "min-h-screen bg-background font-sans mx-auto py-5 md:px-10 lg:px-20"
           )}
         >
           <TooltipProvider delayDuration={0}>
